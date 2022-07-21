@@ -423,6 +423,89 @@ Apply class clickable to th
 - Sorting - Extracting a Method
 • In Movies, extract logic of movies to display to getPagedData
 return {totalCount: filtered.length , data: movies}
+---------------------------------------------------------------
+
+Section 6 : Routing
+
+- Setup
+• Install extesion :
+Auto Import - ES6, TS, JSX, TSX (Sergey Korenuk)
+
+- Adding Routing
+• Install react-router-dom@4.3.1
+• In index.js - import {BrowserRouter} from 'react-router-dom'
+Wrap <App /> with BrowserRouter
+• Register routes in App.js
+import {Route} react-router-dom
+Below NavBar add
+<Route path="/products" component={Products} />
+Add same for /posts, /admin and / (home)
+
+- Switch
+• Prevent redering of multiple routes
+1. Using exact attribute
+2. Using Switch component
+import {Switch} from 'react-router-dom'
+Wrap all routes with Switch
+Only first matching route is rendered.
+So, order routes specific to generic.
+
+- Link
+• Prevent making of http request
+• In navbar.jsx replace anchor with Link
+import {Link} from 'react-router-dom'
+Use <Link to="path">text</Link>
+• Working : Link updates url of page, then router updates page according to url.
+
+- Route Props
+• Route component injects props to child : 
+history - to work with history object,
+location - current url,
+match - info about url matching with path.
+
+- Passing Props
+• Setting additional props for component in Route
+Use render attribute as
+render={(props) => <Products name="value" {...props} /> }
+
+- Route parameters
+• Define parameter in Route with /path/:paramname
+• Reading route params : this.props.match.params.<keyName>
+
+- Optional parameters
+• Append ? to parameter name : /path/:paramname?
+
+- Query string parameters
+• Query string params are in props.location.search
+• install query-string@6.1.0
+• import queryString from 'query-string'
+• Use queryString.parse(location.search), returns object
+• Values are always string and need to parsed.
+
+- Redirects
+• In App.js
+• Apply exact to Home route
+• import Redirect from react-router-dom
+• Add before home route
+<Route path="/not-found" component={NotFound} />
+• Add after Routes : <Redirect to="/not-found" />
+• For moving resources from one to other url 
+<Redirect from="" to="" />
+
+- Programmatic Navigation
+• In props.history has methods
+push() - add new address and adding to history
+replaces() - replaces current address and not adding to history
+• Using it in a function : this.props.history.push('/products')
+
+- Nested routing
+• Create sideBar.jsx in components
+• Add ul>li>(Link[to=''])*2 for /admin/posts and /admin/users
+• import SideBar in dashboard.jsx after h1
+• Add Route after SideBar as
+<Route path="/admin/users" component={Users} />
+<Route path="/admin/posts" component={Posts} />
+• Route component is regular component. If current url matches then it renders the component.
 
 
 
