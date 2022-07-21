@@ -1,0 +1,428 @@
+Section 1 : Getting Started
+
+- What is React
+• React is a library
+• Renders view and Syncing view with state
+• React application is a Tree of components
+• Component
+A Javascript class having
+state and
+render method - outputs React element (maps itself to DOM element)
+• Virtual DOM : lightweight representation of DOM in memory, cheap to create
+• On change of Component state -> New react element is created -> React compares it to older element for changes and updates Real DOM.
+
+- Setting up development environment
+• Install node js from nodejs.org
+• Install VS Code
+• VS Code extensions 
+Simple React Snippets (Burke Holland)
+Prettier (Esben Petersen)
+• Enable formatting on save : Settings > User settings > editor.formatOnSave : true
+
+- First React App
+• Run : npx create-react-app appname
+Installed are : 
+development server,
+webpack : bundling files,
+babel : compiling javascript code.
+• For customizing configuration : eject using : npm run eject
+• Go to folder and launch server : npm start
+• Folder structure
+node_modules - containing 3rd party libraries and react
+public - public assets of application
+src - components of application
+App.js - base component
+index.js - entry point of application
+• JSX - Javascript XML
+• Babel converts JSX into javascript code.
+
+- Hello World
+• Delete all files in src folder
+• create index.js in src
+• Add import as
+import React from 'react';
+import ReactDOM from 'react-dom';
+• Create element as
+const element = <h1>Hello World</h1>;
+• Rendering on DOM
+ReactDOM.render(element, document.getElementById('root'));
+
+- Custom configs
+• We need to eject as
+• npm run eject
+---------------------------------------------------------------
+
+Section 2 : ES6 Refresher
+Let/Const, Objects, this, Arrow Funcs,
+Destructuring, Spread, Classes, Modules
+
+- let vs  var vs const
+var - accessible anywhere in defined function
+let - accessible only in defined block
+const - accessible only in defined block, can be defined once.
+
+- objects
+are collection of key value pairs
+method - function defined in a object
+Accessing members
+1. dot notation -> obj.member
+2. bracket notation -> obj['member']
+
+- this keyword
+if used in method of object - returns reference to the object
+if used in standalone function - returns global object (undefined / window object)
+
+- binding this
+Functions are object in Javascript
+func.bind(obj) - returns new func instance with this keyword refer to obj
+
+- Arrow functions
+Single parameter - brackets can be excluded
+Single line and return - curly brackets and return keyword can be removed.
+Don't rebind this keyword.
+this and arguments keyword are inherited from their defined scope.
+new keyword cannot be used.
+
+- Array.map function
+• For mapping array to a function
+• Generates a new array with result
+
+- Object destructuring
+const { field1, field2: newField } = obj;
+
+- Spread operator
+• const combined = [...firstArray, ...secondArray];
+• Cloning : const clone = [...first];
+• spreading object : const combined = {...first, ...second};
+
+- Classes
+• Blueprint for objects
+• Constructor : constructor(...) {}
+• new keyword is used to create objects
+
+- Inheritance
+• using extends keyword
+• Constructor in child should have super(...)
+
+- Modules
+• Exporting class
+Named export - export class ClassName
+Default export - export default class ClassName
+• Importing class
+Named import - import { ClassName } from './className'
+Default import - import ClassName from './className'
+---------------------------------------------------------------
+
+Section 3 : Components
+
+- Setting up the Project
+• Create app counter-app
+• Start application : npm start
+• Install bootstrap
+npm i bootstrap@4.1.1
+Import in index.js : import 'bootstrap/dist/css/bootstrap.css'
+
+- First React Component
+• Create folder src/components/
+• Create file counter.jsx
+• Import component
+imrc : import React, { Component } from 'react';
+cc : create class component
+• Remove state property
+• Modify render method, return h1 with Hello World
+• In index.js
+import Counter class
+import Counter from './components/counter';
+Replace <App /> with <Counter />
+• Putting two elements side by side : React.Fragment
+
+- Embedding Expressions
+• state : object containing component data
+• Add state object : state = { count : 0 };
+• Render dynamically
+<span>{this.state.count}</span>
+
+- Setting Attributes
+<img src={this.state.imageUrl} alt=""/>
+• class attribute : className
+• style attribute should be set to Plain JS object : style={{...}}
+
+- Rendering Classes dynamically
+• Define a method for conditionally returning classes string : getBadgeClasses
+• Add it to className attribute of span : className={this.getBadgeClasses()}
+
+- Rendering Lists
+• Lists in JSX
+• Each item should have key attribute with unique value.
+map function : {this.state.tags.map(t => <li key={t.id}>t</li>) }
+
+- Conditional Rendering
+Using plain javascript if else.
+
+- Handling Events (Standard DOM Events)
+• Click : onClick={this.methodName}
+• this is undefined for methodName for onClick
+
+- Binding Event Handlers
+• Bind this in constructor as
+this.methodName = this.methodName.bind(this)
+• Or use arrow function for methodName
+
+- Updating the State
+• We do not modify state directly
+• React should be aware of change
+• Using setState method
+this.setState({ count: this.state.count+1});
+
+- What Happens when state changes
+• setState : tells react component state will be changed
+• React schedules call of render method
+it returns new React element
+it is compared with old virtual dom
+and changes are applied to Real DOM 
+
+- Passing Event Arguments
+• onClick={() => this.methodName(someVar)}
+
+- Setting up the Vidly Project
+• Creat app named vidly
+• Install 2 libraries : bootstrap@4.1.1, font-awesome@4.7.0
+• In index.js
+Import bootstrap : 'bootstrap/dist/css/boostrap.css'
+Import font-awesome : 'font-awesome/css/font-awesome.css'
+• Start project : npm start
+• In App.js
+Change render method to return : <main className="container">
+<h1></h1></main>
+• Copy services folder from Resources.zip
+---------------------------------------------------------------
+
+Section 4 : Composing Components
+
+- Passing Data to components
+• this.props : object containing attributes passed to the component.
+
+- Passing Children
+• this.props.children : children passed between <Comp>...</Comp>
+
+- Debugging React Apps
+• Chrome extension : React Developer Tools
+• $0 in elements window : to get currently selected element
+
+- Props vs State
+• Props : data given to component, Read only
+• State : data which is local or private to component
+
+- Raising and Handling Events
+• The component that owns a piece of the state, should be the one modifying it.
+• Handle event function can be passed as attribute to child components.
+• Child components on an action can call that function.
+
+- Single source of truth
+• First line of state initialization is only run once.
+• Remove local state from child components converting them to Controlled Component, it raises events when data is to be changed.
+
+- Lifting State up
+• When there is no parent child relationship between components.
+• Keeping them in sync
+• Share data between them
+
+- Stateless functional components
+• Where there are no event handlers, helper methods and state.
+• No 'this' keyword
+• Add props as parameter
+• Shortcut : sfc
+
+- Destructuring arguments
+• Using object destructuring for props parameter in sfc.
+
+- Lifecycle Hooks
+• Mount : 
+Component instance is created and inserted into DOM.
+hooks : constructor -> render -> componentDidMount
+• Update :
+When state or props of a component gets changed
+hooks : render -> componentDidUpdate
+• Unmount : 
+When component is removed from DOM
+hooks : componentWillUnmount
+
+- Mounting phase
+• constructor : initializing properties, set state based on props using constructor(props) and super(props).
+• componentDidMount : After component is rendered and all children are mounted, making ajax call to get data from server.
+
+- Update phase
+• componentDidUpdate(prevProps, prevState) : After component is updated. We can compare old and new states and old and new props and make ajax request accordingly.
+
+- Unmount phase
+• componentWillUnmount : Before component is removed. Doing cleanup.
+---------------------------------------------------------------
+
+Section 5 : Pagination, Filtering and Sorting
+
+- Pagination Component Interface
+• Create pagination.jsx file in common folder
+• Use Stateless functional component.
+• Attributes for pagination : itemsCount, pageSize, currentPage, onPageChange
+
+- Pagination Displaying Pages
+• Using bootstrap pagination
+• Create pagesCount = Math.ceil(itemsCount / pageSize)
+• install lodash : npm i lodash@4.17.10
+• import _ from 'lodash'
+• Create page no array from : pages = _.range(1, pagesCount + 1)
+• Use pages.map( to list items )
+• Not rendering single page : if(pagesCount == 1) return  null
+
+- Pagination Handling Page Changes
+• Use anchor to raise onPageChange : () => onPageChange(page)
+• Change pageNo in state
+• Apply active class : className={page === currentPage ? 'page-item active' : 'page-item' }
+
+- Pagination Paginating Data
+• Create utils folder in src
+• Create file paginate.js
+• import lodash
+• export function paginate
+• parms : items, pageNumber, pageSize
+• Calculate startIndex : (pageNumber - 1) * pageSize
+• Convert items to lodash wrapper, slice it and take items and return : 
+return _(items).slice(startIndex)
+.take(pageSize).value();
+• Use this function as : movies = paginate(allMovies, currentPage, pageSize)
+
+- Pagination Type checking with PropTypes
+• Install prop-types@15.6.2
+• Used for reusable components
+• In Pagination import PropTypes
+• Add property : Pagination.propTypes = { 
+itemsCount:  PropTypes.number.isRequired,
+pageSize: PropTypes.number.isRequired,
+currentPage: PropTypes.number.isRequired,
+onPageChange: PropTypes.func.isRequired
+};
+
+- Filtering - Component Interface
+• Add listGroup.jsx in common
+• Create sfc
+• Use row class and add listGroup to new right column
+• Attributes : items, selectedItem, textProperty,
+valueProperty, onItemSelect
+• Use componentDidMount to initialize movies, genre
+this.setState({movies: getGenre()...})
+
+- Filtering - Displaying Items
+• Using bootstrap use list group
+• Map items to li
+
+- Filtering - Default Props
+• Add to ListGroup component
+ListGroup.defaultProps = {
+textProperty: 'name',
+valueProperty: '_id' }
+
+- Filtering - Handling Selection
+• Set onClick to onItemSelect(item)
+• Set class dynamically : using item === selectedItem
+
+- Filtering - Implementing Filtering
+• Apply filter before pagination
+• const filtered = selectedGenre && selectedGenre._id ? allMovies.filter(m =>
+ m.genre._id == selectedGenre._id) : allMovies;
+• Pass filtered.length to pagination count and paragraph
+
+- Filtering - Adding All Genres
+• In componentDidMount
+const genres = [{ _id:"", name: "All Genres"}, ...getGenres()]
+• In handleGenreSelect also set current page to 1.
+
+- Sorting - Extracting MoviesTable
+• Create moviesTable.jsx in components
+• Create sfc MoviesTable
+• Move table
+• Props : movies, onLike, onDelete, onSort
+
+- Sorting - Raising the Sort Event
+• Add onClick to onSort on all th
+title, genre.name, numberInStock, dailyRentalRate
+• In movies.jsx handle onSort
+handleSort
+
+- Sorting - Implementing Sorting
+• Add sortColumn to state of Movies : {path: 'title', order: 'asc'}
+• In handleSort
+clone sortColumn
+if path same change order else change path with asc
+setState - sortColumn
+• import lodash
+• In render
+After filtering and before paginate
+const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order])
+
+- Sorting - Moving Responsibility
+• Putting sort order logic in MoviesTable
+• Convert MoviesTable to Class component
+• Add props to MoviesTable : sortColumn
+• Add method to MoviesTable : raiseSort
+Move sorting logic here
+rename this.state to this.props
+add this.props.onSort(sortColumn)
+
+- Sorting - Extracting TableHeader
+• Add tableHeader.jsx in common
+• Create class component TableHeader
+• Attributes : columns, sortColumn, onSort
+• Move raiseSort into TableHeader
+• Render thead part here
+th elements dynamically with columns using column.label
+add onClick with this.raiseSort(column.path)
+• In MoviesTable
+Add columns = [ {path: 'title', label: 'Title'},... ]
+Use {key:"..."} for empty th
+
+- Sorting - Extracting TableBody
+• Add tableBody.jsx in common
+• Use Class componenet
+• Attributes : data, columns
+• In render method :
+map data array to tr
+columns to td
+
+- Sorting - Rendering Cell Content
+• In MoviesTable, for like and delete
+in columns object add content key with value
+movie => <Like liked={movie.liked} onClick={() => this.props.onLike(movie)}
+movie => <button onClick={() => this.props.onDelete(movie)} className="...">Delete</button>
+• In TableBody
+Import lodash
+Create function renderCell(item, col) conditionally
+if(column.content) return column.content(item)
+return _.get(item, column.path)
+Use it in <td>renderCell(...)</td>
+
+- Sorting - Unique Keys
+• In TableBody to tr apply key={item._id}
+• In td apply key={item._id + (column.path || column.key)} or make it a method createKey(item, column)
+
+- Sorting - Adding the Sort Icon
+• In TableHeader
+Create function renderSortIcon(column)
+if (column.path !== this.props.sortColumn.path) return null
+if (this.props.sortColumn.order === 'asc') return i.fa.fa-sort-asc
+return i.fa.fa-sort-desc
+Add renderSortIcon to th
+Apply class clickable to th
+• In index.css add : .clickable {cursor: pointer;}
+
+- Sorting - Extracting Table
+• Add table.jsx in common
+• Create sfc
+• Attributes : columns, data, sortColumn, onSort
+• Move table element from moviesTable to Table
+
+
+
+-----------------------
+Shortcuts
+Ctrl + P : Go to File
+
