@@ -420,6 +420,10 @@ Apply class clickable to th
 • Attributes : columns, data, sortColumn, onSort
 • Move table element from moviesTable to Table
 
+- Sorting - Extracting a Method
+• In Movies, extract logic of movies to display to getPagedData
+return {totalCount: filtered.length , data: movies}
+
 
 
 -----------------------
