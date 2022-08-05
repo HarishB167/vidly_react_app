@@ -93,10 +93,17 @@ then return validation message.
 * Import Joi from 'joi-browser'
 * Define schema in LoginForm as
 schema = {
-    username: Joi.string().required(),
-    password: Joi.string().required(),
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
 }
 * Validate as : Joi.validate(objectToValidate, schema, {abortEarly: false})
+
+- Validate a Form Using Joi
+* Mapping result.error.details array into object
+* Rewriting validate method
+return when result.error is falsy
+else iterate over error.details as
+errors[item.path[0]] = item.message
 
 -----------------------
 Shortcuts
