@@ -36,6 +36,18 @@ when sumbitting form const username = this.username.current.value
 * We don't use Refs for building forms.
 * We use Refs for DOM libraries, animation etc.
 
+- Controlled Elements
+* Similar to Controlled component
+* Add state property to LoginForm as
+state = { account : {username: "", password: ""}}
+* Removing state of input field / converting to controlled element
+add value attribute to input with this.state.account.username
+* Changing state on change events
+add onChange attribute to input with this.handleChange
+create method handleChange with args (e)
+set typed value from e.currentTarget.value to username
+
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
