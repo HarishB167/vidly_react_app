@@ -113,6 +113,9 @@ Create obj variable as obj = { [name] : value }
 Create sub-schema as schema = { [name] : this.schema[name]}
 Return result.error.details[0].message if there is error else null
 
+- Disabling the Submit button
+* Add attribute disabled={this.validate()} to button
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
