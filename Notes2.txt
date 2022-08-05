@@ -76,6 +76,17 @@ Add error to input.jsx props
 * In loginForm
 In Input add error={errors.username}
 In handleSubmit setState set errors to empty object on null
+
+- Validation on Change
+* In handleChange do validation as
+get errorMessage for input using validateProperty method
+set errorMessage for input in errors if there is error
+else delete key in errors for the input
+* Create validateProperty method
+args : input OR {name, value}
+check for input name, then check it's value
+then return validation message.
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
