@@ -63,6 +63,13 @@ then it becomes uncontrolled element
 * Create input.jsx in common folder
 Using name, label, value, onChange
 
+- Validation
+* Add errors object property in state
+if input fields has error then it's name will be added to errors with error string
+* Call validate method in handleSubmit, and add errors to state accordingly
+* validate method will return null on no errors.
+
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
