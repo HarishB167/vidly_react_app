@@ -105,6 +105,14 @@ return when result.error is falsy
 else iterate over error.details as
 errors[item.path[0]] = item.message
 
+- Validate a Field Using Joi
+* Computed properties in ES6
+setting key names dynamically : { [varName] : val}
+* Modifying validateProperty method
+Create obj variable as obj = { [name] : value }
+Create sub-schema as schema = { [name] : this.schema[name]}
+Return result.error.details[0].message if there is error else null
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
