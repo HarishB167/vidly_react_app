@@ -54,6 +54,15 @@ add name attribute to input with username value
 * Do destructuring in handleChange as
 (e) becomes ({currentTarget:input})
 
+- Common errors
+* if value attribute of element has value undefined/null,
+then it becomes uncontrolled element
+* Initialize variables used for value attribute at onset.
+
+- Extracting a Reusable Input
+* Create input.jsx in common folder
+Using name, label, value, onChange
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
