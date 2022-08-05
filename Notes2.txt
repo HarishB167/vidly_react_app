@@ -116,6 +116,20 @@ Return result.error.details[0].message if there is error else null
 - Disabling the Submit button
 * Add attribute disabled={this.validate()} to button
 
+- Extracting a Reusable Form
+* In LoginForm rename account to data
+* In common folder create form.jsx
+In state object add data and errors with empty object
+move validate and validateProperty to Form
+import Joi in Form
+Remove render method from Form
+In LoginForm for handleSubmit for statements after
+validation move them to new function doSubmit.
+Add doSubmit call to handleSubmit
+Move handleSubmit to Form class
+Move handleChange to Form Class
+* Make LoginForm extend Form
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
