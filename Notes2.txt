@@ -47,6 +47,12 @@ add onChange attribute to input with this.handleChange
 create method handleChange with args (e)
 set typed value from e.currentTarget.value to username
 
+- Handling Multiple Inputs
+* Setting property dynamically
+use bracket notation : account[input.name]
+add name attribute to input with username value
+* Do destructuring in handleChange as
+(e) becomes ({currentTarget:input})
 
 -----------------------
 Shortcuts
