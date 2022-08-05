@@ -1,0 +1,33 @@
+Section 7 : Forms
+
+- Introduction
+Login form, Register form, Add/Edit movies, Search box
+
+- Building a Bootstrap form
+ * Create loginForm.jsx
+create LoginForm cc with h1
+Add route in App.js for /login
+In navBar.jsx add NavLink for Login
+In bootstrap form, div.form-group groups label and corresponding input,
+also input has form-control class
+In loginForm
+Wrap h1 with div
+Create form as
+form>(div.form-group>label+input.form-control)*2
+remove action attribute
+Set labels : Username, Password
+Set for(htmlFor) and id attribute : username, password
+Add primary Login button
+
+- Handling Form Submission
+* Preventing full page reload
+Add onSubmit attribute to form
+Create method handleSubmit with e argument
+add statement e.preventDefault(); then do something
+Set onSubmit to this method
+
+-----------------------
+Shortcuts
+1. Wrapping html with other html
+Select the text > Shift+Ctrl+P > wrap with abbreviation > enter >
+type tag/zen coding (div.container)
