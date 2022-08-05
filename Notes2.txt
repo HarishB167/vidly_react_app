@@ -87,6 +87,17 @@ args : input OR {name, value}
 check for input name, then check it's value
 then return validation message.
 
+- JOI
+* Install : npm i joi-browser@13.4
+* We define schema object, and it has properties and their validation requirement
+* Import Joi from 'joi-browser'
+* Define schema in LoginForm as
+schema = {
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+}
+* Validate as : Joi.validate(objectToValidate, schema, {abortEarly: false})
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
