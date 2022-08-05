@@ -26,6 +26,16 @@ Create method handleSubmit with e argument
 add statement e.preventDefault(); then do something
 Set onSubmit to this method
 
+- Refs
+* In react we don't use document object directly
+* Getting value of input field
+in component define Refs object property username = React.createRef()
+in input element set ref attribute to this.username
+when sumbitting form const username = this.username.current.value
+* current field of Refs object returns DOM element
+* We don't use Refs for building forms.
+* We use Refs for DOM libraries, animation etc.
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
