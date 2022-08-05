@@ -67,9 +67,15 @@ Using name, label, value, onChange
 * Add errors object property in state
 if input fields has error then it's name will be added to errors with error string
 * Call validate method in handleSubmit, and add errors to state accordingly
-* validate method will return null on no errors.
+* validate method will return empty object on no errors.
 
-
+- Displaying Validation Errors
+* In input.jsx
+After input field add div.alert.alert-danger with error conditionally
+Add error to input.jsx props
+* In loginForm
+In Input add error={errors.username}
+In handleSubmit setState set errors to empty object on null
 -----------------------
 Shortcuts
 1. Wrapping html with other html
