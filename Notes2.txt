@@ -150,6 +150,10 @@ In input use {...rest} for applying remaining props as attributes
 * Create mapViewToModel function to map server data to view data.
 completed
 
+- Exercise 3 - Search Movies
+* Using .toLowerCase and .startsWith
+completed
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
