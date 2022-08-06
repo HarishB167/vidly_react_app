@@ -130,6 +130,19 @@ Move handleSubmit to Form class
 Move handleChange to Form Class
 * Make LoginForm extend Form
 
+- Extracting Helper Rendering Methods
+* Helper method for submit button
+arg: label, return the markup
+* Helper method for input
+arg: name, label, type
+also add type attribute to input with default value 'text'
+apply type dynamically in input.jsx
+* Using rest operator in input.jsx
+In props destructuring store remaining props in ...rest
+In input use {...rest} for applying remaining props as attributes
+
+
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
