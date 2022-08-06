@@ -146,6 +146,9 @@ In input use {...rest} for applying remaining props as attributes
 * Add link to NavBar
 * Create RegisterForm extending Form
 
+- Excercise 2 - Movie Form
+* Create mapViewToModel function to map server data to view data.
+completed
 
 -----------------------
 Shortcuts
