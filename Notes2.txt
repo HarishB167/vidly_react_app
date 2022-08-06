@@ -141,6 +141,10 @@ apply type dynamically in input.jsx
 In props destructuring store remaining props in ...rest
 In input use {...rest} for applying remaining props as attributes
 
+- Excercise 1 - Register Form
+* Create route for Register in App.js
+* Add link to NavBar
+* Create RegisterForm extending Form
 
 
 -----------------------
