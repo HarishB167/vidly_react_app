@@ -153,6 +153,170 @@ completed
 - Exercise 3 - Search Movies
 * Using .toLowerCase and .startsWith
 completed
+---------------------------------------------------------------
+
+Section 8 : Calling Backend Services
+
+- Introduction
+* Using fake backend from jsonplaceholder.typicode.com
+
+- Http Clients
+* 3 clients : Fetch API, jQuery AJAX, Axios
+* Installing axios : npm i axios@0.18
+
+- Getting Data
+* In App.js
+import axios from 'axios'
+In componentDidMount make request as
+axios.get('<typicode>/posts')
+it return promise and needed to await
+Set state of posts from data of response
+* Promise
+holds result of async operation
+state goes from pending to resolved or rejected
+[[PromiseState]] and [[PromiseValue]] are internal property
+Response object has: config, data, headers, reqeust, status, statusText
+Getting result :
+old way - promise.then()
+new way - using await, function should be decorated with async
+
+- Creating Data
+* In handleAdd
+create post object
+send using : axios.post(url, object)
+decorate func : handleAdd = asyn() =>...
+log result to console
+Append it at beginning of posts
+
+- Lifecycle of a Request
+* Options request method
+When frontend and backend are on different domain
+Browser always sends Options request for security
+
+- Updating Data
+* In handleUpdate
+change post title - post.title = "value"
+Update some properties - axios.patch
+Update all properties - axios.put
+args - urlWithId, dataObject
+await the request
+log the response data
+Update the UI : 
+const posts = clone of this.state.posts
+posts[indexOfpost] = clone of post
+setState with posts
+
+- Deleting data
+* In handleDelete
+await axios.delete(urlWithId)
+remove post from posts in state
+
+- Optimistic vs Pessimistic Updates
+* Pessimistic : when update happens after successful of CRUD Op
+* Optimistic : update happens first then CRUD happens as
+storing original state
+updating first : this.setState({posts})
+calling server CRUD op : await axios.delete etc.
+when fails using try catch: this.setState({posts:original})
+
+- Expected vs Unexpected Errors
+* Expected
+Client errors : 40X errors
+Display a specific error message
+* Unexpected
+Technically shouldn't happen normally
+e.g. - Network down, server down, database down, bug
+Log them
+Display a generic and friendly error message
+* exception object in try/catch has
+ex.request : set when successfully submit to server,
+otherwise null
+ex.response : set when response received successfully,
+and not set network/server down
+* Check for 404
+if (ex.response && ex.response.status === 404) display error
+Other non-considered errors will be unexpected errors
+Log the unexpected errors
+
+- Handling Unexpected Errors Globally
+* Using interceptor as
+At file beginning after imports add
+axios.interceptors.response.use(successFunc, errorFunc)
+succssFunc will be null
+errorFunc => {
+    Log "interceptor called"
+    expectedError = error.response && 400 =< error.response.status < 500
+    if not expectedError : then log, and alert
+    return rejected Promise.reject(error)
+}
+* try/catch is needed when
+We need to do something specific on failure as
+check for expected error
+undo the UI changes made
+
+- Extracting a Reusable Http Service
+* Axios will be hidden behing new module
+So, axios can be replaced with other library
+* Create file src/services/httpService.js
+* In httpService.js
+import axios
+Move interceptor code here
+remove interceptor code from App.js
+export default object as
+{get:axios.get, post:axios.post, put:axios.put, delete:axios.delete}
+* In App.js
+import http from httpService
+Replace axios with http
+
+- Extracting a Config Module
+* Putting apiEndpoint url out of App.js
+Create config.json in src folder
+add {"apiEndpoint":"url"}
+* In App.js
+import config from "./config.json"
+Prefix apiEndpoint with "config."
+
+- Displaying Toast Notifications
+* install toastify
+npm i react-toastify@4.1
+* In App.js
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+Add <ToastContainer /> at beginning of App component
+* In httpService
+import {toast} from 'react-toastify'
+Replace alert with toast.error
+
+- Logging Errors
+* Using sentry
+install as : npm i raven-js@3.26.4
+* In index.js
+import Raven from 'raven-js'
+Add following
+Raven.config("<dsn value>", {
+    releast: '0-0-0',
+    environment: 'development-text',
+}).install()
+* DSN is found at :
+Projects > <projectname> > Settings > Client keys(DSN)
+* In httpService
+import Raven form 'raven-js'
+Replace console.log with Raven.captureException(error)
+
+- Extracting a Logger Service
+* Create file src/services/logService.js
+import Raven from 'raven-js'
+Create function init
+Move Raven.config statement here
+Create function log(error)
+add Raven.captureException(error)
+Export default as {init, log}
+* In index.js
+import logService as logger
+Initialize as logger.init()
+* In httpService.js
+import logService
+Replace Raven.captureException with logger.log
 
 -----------------------
 Shortcuts
