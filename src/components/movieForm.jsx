@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { getGenres } from "../services/fakeGenreService";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
+import { getGenres } from "../services/genreService";
+import { getMovie, saveMovie } from "../services/movieService";
 
 class MovieForm extends Form {
   state = {
@@ -17,9 +17,9 @@ class MovieForm extends Form {
   };
 
   schema = {
-    _id: Joi.string().optional(),
+    id: Joi.optional(),
     title: Joi.string().required().label("Title"),
-    genreId: Joi.string().required().label("Genre"),
+    genreId: Joi.required().label("Genre"),
     numberInStock: Joi.number()
       .integer()
       .min(0)
@@ -28,14 +28,14 @@ class MovieForm extends Form {
     dailyRentalRate: Joi.number().min(0.01).max(10).label("Rate"),
   };
 
-  componentDidMount() {
-    const genres = getGenres();
+  async componentDidMount() {
+    const genres = await getGenres();
     this.setState({ genres });
 
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 
-    const movie = getMovie(movieId);
+    const movie = await getMovie(movieId);
 
     if (!movie) return this.props.history.replace("/not-found");
     this.setState({ data: this.mapViewToModel(movie) });
@@ -43,9 +43,9 @@ class MovieForm extends Form {
 
   mapViewToModel(movie) {
     return {
-      _id: movie._id,
+      id: movie.id,
       title: movie.title,
-      genreId: movie.genre._id,
+      genreId: movie.genre.id,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
     };
@@ -67,7 +67,7 @@ class MovieForm extends Form {
             "genreId",
             "Genre",
             this.state.genres,
-            "_id",
+            "id",
             "name"
           )}
           {this.renderInput("numberInStock", "Number in Stock", "number")}

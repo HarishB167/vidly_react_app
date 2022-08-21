@@ -4,10 +4,9 @@ import _ from "lodash";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import ListGroup from "./common/listGroup";
-import { getMovies } from "../services/fakeMovieService";
+import { getMovies, deleteMovie } from "../services/movieService";
+import { getGenres } from "../services/genreService";
 import { paginate } from "../utils/paginate";
-import { getGenres } from "../services/fakeGenreService";
-import { deleteMovie } from "../services/fakeMovieService";
 import SearchBox from "./common/searchBox";
 
 class Movies extends Component {
@@ -21,16 +20,18 @@ class Movies extends Component {
     sortColumn: { path: "title", order: "asc" },
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const genres = await getGenres();
+    const movies = await getMovies();
     this.setState({
-      movies: getMovies(),
-      genres: [{ _id: "", name: "All Genres" }, ...getGenres()],
+      movies: movies,
+      genres: [{ id: "", name: "All Genres" }, ...genres],
     });
   }
 
   handleDelete = (movie) => {
-    const movies = this.state.movies.filter((m) => m._id !== movie._id);
-    deleteMovie(movie._id);
+    const movies = this.state.movies.filter((m) => m.id !== movie.id);
+    deleteMovie(movie.id);
     this.setState({ movies });
   };
 
@@ -84,10 +85,8 @@ class Movies extends Component {
       filteredMovies = allMovies.filter((m) =>
         m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
-    else if (selectedGenre && selectedGenre._id)
-      filteredMovies = allMovies.filter(
-        (m) => m.genre._id === selectedGenre._id
-      );
+    else if (selectedGenre && selectedGenre.id)
+      filteredMovies = allMovies.filter((m) => m.genre.id === selectedGenre.id);
 
     const sorted = _.orderBy(
       filteredMovies,
@@ -115,6 +114,7 @@ class Movies extends Component {
             items={genres}
             selectedItem={selectedGenre}
             onItemSelect={this.handleGenreSelect}
+            valueProperty="id"
           />
         </div>
         <div className="col">

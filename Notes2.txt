@@ -318,6 +318,25 @@ Initialize as logger.init()
 import logService
 Replace Raven.captureException with logger.log
 
+- Vidly Backend
+* Install MongoDB
+
+- Installing MongoDB
+TODO
+
+- Setting Up the Node Backend
+* Clone git repo
+github.com/mosh-hamedani/vidly-api-node
+* Install dependencies : npm i
+* Seed database : node seed.js
+* Start web server : node index.js
+localhost:3900/api/genres
+
+- Disabling Authentication
+
+- Exercise-Connect Movies Page to the Backend
+
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
