@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import _ from "lodash";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
@@ -29,10 +30,17 @@ class Movies extends Component {
     });
   }
 
-  handleDelete = (movie) => {
-    const movies = this.state.movies.filter((m) => m.id !== movie.id);
-    deleteMovie(movie.id);
+  handleDelete = async (movie) => {
+    const originalMovies = this.state.movies;
+    const movies = originalMovies.filter((m) => m.id !== movie.id);
     this.setState({ movies });
+    try {
+      await deleteMovie(movie.id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        toast.error("This movie has already been deleted.");
+      this.setState({ movies: originalMovies });
+    }
   };
 
   handleLike = (movie) => {
