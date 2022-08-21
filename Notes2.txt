@@ -453,9 +453,25 @@ catch (ex) {
   }
 }
 
+- Storing the JWT
+* Browser has small database called localstorage
+key value pairs can be stored
+* In LoginForm in doSubmit
+const {data: jwt} = await login(...
+localStorage.setItem('token', jwt)
+* In Chrome dev tools > Application 
+Storage > Local Storage
+In website will have stored value as key value pair
+* Redirect user to home page
+this.props.history.push('/');
+* How I did storing
+const {data:result} = await login(...
+localStorage.setItem('access', result.access)
+localStorage.setItem('refresh', result.refresh)
+
 
 -----------------------
-Section 9 Vid 7 : Handling Login Errors - completed
+Section 9 Vid 8 : Storing the JWT - completed
 
 Shortcuts
 1. Wrapping html with other html
