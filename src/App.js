@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   useEffect(() => {
     try {

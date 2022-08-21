@@ -561,9 +561,25 @@ this.setState({user})
 In render method
 Add prop to NavBar : user={this.state.user}
 
+- Showing the Current User on NavBar
+* In NavBar get user prop as args as ({user})
+* Render Login and Register conditionally
+{!user && <React.Fragment> 
+  ...Login and Register element...
+</React.Fragment>}
+* Render Logout and Username conditionally
+After previous element add
+{user && <React.Fragment>
+ <NavLink ... to="/profile">{user.name}...
+ <NavLink ... to="/logout">Logout...
+</React.Fragment>}
+* Full page reload : 
+In loginForm and registerForm in doSubmit after setting token
+window.location = '/';
+
 
 -----------------------
-Section 9 Vid 11 : Getting the Current User - completed
+Section 9 Vid 12 : Showing the Current User on NavBar - completed
 
 Shortcuts
 1. Wrapping html with other html
