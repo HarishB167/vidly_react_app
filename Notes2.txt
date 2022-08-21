@@ -469,9 +469,45 @@ const {data:result} = await login(...
 localStorage.setItem('access', result.access)
 localStorage.setItem('refresh', result.refresh)
 
+- Logging in the User upon Registration
+* In RegisterForm in doSubmit method
+store register response
+const response = await userService.register(...
+localStorage.setItem('token', response.headers['x-auth-token'])
+this.props.history.push("/");
+* How I did it
+> Returning access and refresh token in headers in drf backend
+Create a new middleware in project
+in core folder in middleware.py
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import User
+Create class CoreMiddleware
+In __init__ method
+arg : get_response
+self.get_response = get_response
+In __call__ method
+arg : request
+response = self.get_response(request)
+if request.method == 'POST and
+   request.path == '/auth/users/' and
+   response.status_code == 201:
+   id = response.data.get('id')
+   if id:
+      user = User.objects.get(pk=id)
+      tokens = RefreshToken.for_user(user)
+      response['x-refresh-token'] = tokens
+      response['x-access-token'] = tokens.access_token
+      response['access-control-expose-headers'] = 'x-access-token, x-refresh-token'
+   return response
+Add following middleware in settings.py/MIDDLEWARE
+core.middleware.CoreMiddleware
+> In RegisterForm doSubmit method
+localStorage.setItem('access', response.headers['x-access-token'])
+localStorage.setItem('refresh', response.headers['x-refresh-token'])
+      
 
 -----------------------
-Section 9 Vid 8 : Storing the JWT - completed
+Section 9 Vid 9 : Logging in the User upon Registration - completed
 
 Shortcuts
 1. Wrapping html with other html
