@@ -577,9 +577,23 @@ After previous element add
 In loginForm and registerForm in doSubmit after setting token
 window.location = '/';
 
+- Logging out a User
+* In components folder add logout.jsx
+imrc
+cc Logout
+In render method return null
+In cdm : 
+localStorage.removeItem('access')
+localStorage.removeItem('refresh')
+window.location = '/'
+* In App.js
+After login route add
+<Route path="/logout" component={Logout} />
+
+
 
 -----------------------
-Section 9 Vid 12 : Showing the Current User on NavBar - completed
+Section 9 Vid 13 : Logging out a User - completed
 
 Shortcuts
 1. Wrapping html with other html
