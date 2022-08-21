@@ -1,14 +1,13 @@
-import axios from "axios";
-
-const apiEndPoint = "http://localhost:8000/api/";
+import http from "./httpService";
+import config from "../config.json";
 
 export async function getMovies() {
-  const result = await axios.get(apiEndPoint + "movies/");
+  const result = await http.get(config.apiEndpoint + "movies/");
   return result.data;
 }
 
 export async function getMovie(id) {
-  const result = await axios.get(apiEndPoint + "movies/" + id);
+  const result = await http.get(config.apiEndpoint + "movies/" + id);
   return result.data;
 }
 
@@ -20,15 +19,18 @@ export async function saveMovie(movie) {
     genre: movie.genreId,
   };
   if (movie.id) {
-    const result = await axios.put(`${apiEndPoint}movies/${movie.id}/`, m);
+    const result = await http.put(
+      `${config.apiEndpoint}movies/${movie.id}/`,
+      m
+    );
     return result.data;
   } else {
-    const result = await axios.post(apiEndPoint + "movies/", m);
+    const result = await http.post(config.apiEndpoint + "movies/", m);
     return result.data;
   }
 }
 
 export async function deleteMovie(id) {
-  const result = await axios.delete(apiEndPoint + "movies/" + id);
+  const result = await http.delete(config.apiEndpoint + "movies/" + id);
   return result.data;
 }

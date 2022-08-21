@@ -336,6 +336,13 @@ localhost:3900/api/genres
 
 - Exercise-Connect Movies Page to the Backend
 
+- Adding Http and Log Services
+* Copy httpService and logService in service folder
+* Install axios and toastify ; axios@0.18.0 react-toastify@4.1.0
+* In App.js add Toast container as
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+In render method before NavBar add <ToastContainer />
 
 -----------------------
 Shortcuts
