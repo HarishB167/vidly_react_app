@@ -438,8 +438,24 @@ const {data} = this.state;
 await login(data.username, data.password)
 Mark function as async
 
+- Handling Login Errors
+* In LoginForm in doSubmit
+wrap login call with try catch
+try {...}
+catch (ex) {
+  if (ex.response && ex.response.status === 400) {
+    const errors = {...this.state.errrors}
+    errors.username = ex.response.data.username
+    errors.password = ex.response.data.password
+    if (ex.response.data.detail)
+      errors.username = ex.response.data.detail
+    this.setState({errors})
+  }
+}
+
+
 -----------------------
-Section 9 Vid 6 : Submitting the Login Form - completed
+Section 9 Vid 7 : Handling Login Errors - completed
 
 Shortcuts
 1. Wrapping html with other html
