@@ -369,6 +369,10 @@ try {
     this.props.history.replace("/not-found");
 }
 
+- Refactoring
+* In componentDidMount in movieForm.jsx
+Divide it into populateGenre and populateMovie
+
 -----------------------
 Shortcuts
 1. Wrapping html with other html
