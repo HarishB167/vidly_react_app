@@ -372,8 +372,57 @@ try {
 - Refactoring
 * In componentDidMount in movieForm.jsx
 Divide it into populateGenre and populateMovie
+---------------------------------------------------------------
+
+Section 9 : Authentication and Authorization
+
+- Introduction
+* JSON Web Tokens
+* Calling Protected APIs
+* Showing / Hiding elements
+* Protecting Routes
+
+- Registering a New User
+* Check backend endpoints using postman
+
+- Submitting the Registration Form
+* Create a new service userService.js
+Register, Delete, Getinfo
+import http from './httpService'
+import {apiUrl} from "../config.json";
+
+const apiEndpoint = apiUrl + "/auth/users/";
+
+export function register(user) {
+  return http.post(apiEndpoint, {
+    email: user.username,
+    username: user.name,
+    password: password
+  }
+}
+* In RegisterForm
+import * as userService from '../services/userService'
+In doSubmit method
+await userService.register(this.state.data);
+mark this function as async
+
+- Handling Registration Errors
+* In registerForm in doSubmit
+wrap register call with try catch
+try {...}
+catch (ex) {
+  if (ex.response && ex.response.status === 400){
+    const errors = {...this.state.errors};
+    errors.name = ex.response.data.username
+    errors.username = ex.response.data.email
+    this.setState({errors})
+  }
+} 
+
 
 -----------------------
+Section 9 Vid 4 : Handling Registration Errors - completed
+
 Shortcuts
 1. Wrapping html with other html
 Select the text > Shift+Ctrl+P > wrap with abbreviation > enter >

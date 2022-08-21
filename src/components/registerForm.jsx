@@ -16,8 +16,16 @@ class RegisterForm extends Form {
   };
 
   doSubmit = async () => {
-    // console.log("Register form submitted");
-    await userService.register(this.state.data);
+    try {
+      await userService.register(this.state.data);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.name = ex.response.data.username;
+        errors.username = ex.response.data.email;
+        this.setState({ errors });
+      }
+    }
   };
 
   render() {
