@@ -419,9 +419,27 @@ catch (ex) {
   }
 } 
 
+- Logging in a User
+* Check backend login endpoint using postman
+
+- Submitting the Login Form
+* Create a new service authService.js
+Login and Logout
+import http, apiUrl
+const apiEndpoint = apiUrl + "/auth/jwt/create/"
+
+export function login(username, password) {
+  return http.post(apiEndpoint, {username, password})
+}
+* In LoginForm
+import {login} from '../services/authService';
+In doSubmit
+const {data} = this.state;
+await login(data.username, data.password)
+Mark function as async
 
 -----------------------
-Section 9 Vid 4 : Handling Registration Errors - completed
+Section 9 Vid 6 : Submitting the Login Form - completed
 
 Shortcuts
 1. Wrapping html with other html
