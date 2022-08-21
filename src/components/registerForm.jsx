@@ -20,6 +20,7 @@ class RegisterForm extends Form {
       const response = await userService.register(this.state.data);
       localStorage.setItem("access", response.headers["x-access-token"]);
       localStorage.setItem("refresh", response.headers["x-refresh-token"]);
+      this.props.history.push("/");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

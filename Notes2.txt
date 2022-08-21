@@ -505,11 +505,53 @@ core.middleware.CoreMiddleware
 localStorage.setItem('access', response.headers['x-access-token'])
 localStorage.setItem('refresh', response.headers['x-refresh-token'])
       
+- JSON Web Tokens (JWT)
+* Has 3 parts
+Header - alg, typ
+Payload - properties object
+Signature - Digital signature, generated based on
+header, payload and secret
+* In Django RF storing username and email in JWT
+> In core/serializers.py create serializer as
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+class CustomTokenObtainPairSerializer
+extends : TokenObtainPairSerializer
+Add class method as :
+@classmethod
+def get_token(cls, user):
+  token = super().get_token(user)
+  token['username'] = user.username
+  token['email'] = user.email
+  return token
+> In core/views.py create view as :
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import CustomTokenObtainPairSerializer
+class CustomTokenObtainPairView
+extends : TokenObtainPairView
+Add fields :
+serializer_class = CustomTokenObtainPairSerializer
+token_obtain_pair = TokenObtainPairView.as_view()
+> In core/urls.py define urls as
+from django.urls import re_path
+from rest_framework_simplejwt import views
+from .views import CustomTokenObtainPairView
+urlpatterns = [
+    re_path(r"^jwt/create/?", CustomTokenObtainPairView.as_view(), name="jwt-create"),
+    re_path(r"^jwt/refresh/?", views.TokenRefreshView.as_view(), name="jwt-refresh"),
+    re_path(r"^jwt/verify/?", views.TokenVerifyView.as_view(), name="jwt-verify"),
+]
+> In primary urls.py replace as
+'djoser.urls.jwt' to 'core.urls'
+> In core/middleware.py also make it add details to payload as
+tokens['username'] = user.username
+tokens['email'] = user.email
+
 
 -----------------------
-Section 9 Vid 9 : Logging in the User upon Registration - completed
+Section 9 Vid 10 : JSON Web Tokens (JWT) - completed
 
 Shortcuts
 1. Wrapping html with other html
 Select the text > Shift+Ctrl+P > wrap with abbreviation > enter >
 type tag/zen coding (div.container)
+
