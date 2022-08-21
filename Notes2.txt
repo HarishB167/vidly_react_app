@@ -546,9 +546,24 @@ urlpatterns = [
 tokens['username'] = user.username
 tokens['email'] = user.email
 
+- Getting the Current User
+* Install jwt-decode : npm i jwt-decode@2.2.0
+* In App.js in App componnet
+import jwtDecode from "jwt-decode"
+state = {};
+in componentDidMount() 
+try{
+const jwt = localStorage.getItem('access')
+const data = jwtDecode(jwt)
+const user = {username:data.username, id:data.user_id, email:data.email}
+this.setState({user})
+} catch (ex) {}
+In render method
+Add prop to NavBar : user={this.state.user}
+
 
 -----------------------
-Section 9 Vid 10 : JSON Web Tokens (JWT) - completed
+Section 9 Vid 11 : Getting the Current User - completed
 
 Shortcuts
 1. Wrapping html with other html
