@@ -8,6 +8,7 @@ export async function getMovies() {
 
 export async function getMovie(id) {
   const result = await http.get(config.apiEndpoint + "movies/" + id);
+  console.log(result);
   return result.data;
 }
 
