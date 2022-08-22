@@ -708,8 +708,10 @@ window.location = state ? state.from.pathname : '/';
 In render method before return
 if (auth.getCurrentUser()) return <Redirect to="/" />
 
+- Exercise : Hiding Delete column
+
 -----------------------
-Section 9 Vid 21 : Redirecting after Login - completed
+Section 9 Vid 22 : Exercise - completed
 
 Shortcuts
 1. Wrapping html with other html

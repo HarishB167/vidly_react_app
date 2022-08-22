@@ -4,22 +4,31 @@ import Like from "./common/like";
 import Table from "./common/table";
 
 class MoviesTable extends Component {
-  columns = [
-    {
-      path: "title",
-      label: "Title",
-      content: (movie) => <Link to={"/movies/" + movie.id}>{movie.title}</Link>,
-    },
-    { path: "genre.name", label: "Genre" },
-    { path: "numberInStock", label: "Stock" },
-    { path: "dailyRentalRate", label: "Rate" },
-    {
-      key: "like",
-      content: (movie) => (
-        <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
-      ),
-    },
-    {
+  state = {
+    columns: [
+      {
+        path: "title",
+        label: "Title",
+        content: (movie) => (
+          <Link to={"/movies/" + movie.id}>{movie.title}</Link>
+        ),
+      },
+      { path: "genre.name", label: "Genre" },
+      { path: "numberInStock", label: "Stock" },
+      { path: "dailyRentalRate", label: "Rate" },
+      {
+        key: "like",
+        content: (movie) => (
+          <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+        ),
+      },
+    ],
+  };
+
+  componentDidMount() {
+    const { user } = this.props;
+    const columns = [...this.state.columns];
+    const deleteCol = {
       key: "delete",
       content: (movie) => (
         <button
@@ -30,14 +39,16 @@ class MoviesTable extends Component {
           Delete
         </button>
       ),
-    },
-  ];
+    };
+    if (user) columns.push(deleteCol);
+    this.setState({ columns });
+  }
 
   render() {
     const { movies, sortColumn, onSort } = this.props;
     return (
       <Table
-        columns={this.columns}
+        columns={this.state.columns}
         data={movies}
         sortColumn={sortColumn}
         onSort={onSort}
