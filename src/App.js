@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(auth.getCurrentUser());
 
   useEffect(() => {
     const user = auth.getCurrentUser();
@@ -31,7 +31,13 @@ function App() {
           <Route path="/login" component={LoginForm} />
           <Route path="/logout" component={Logout} />
           <Route path="/register" component={RegisterForm} />
-          <Route path="/movies/:id" component={MovieForm} />
+          <Route
+            path="/movies/:id"
+            render={(props) => {
+              if (!user) return <Redirect to="/login" />;
+              return <MovieForm {...props} />;
+            }}
+          />
           <Route
             path="/movies"
             render={(props) => <Movies {...props} user={user} />}

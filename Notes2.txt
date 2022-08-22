@@ -662,8 +662,17 @@ const {user} = this.props
 Wrap New movie button with
 {user && ..button...}
 
+- Protecting Routes
+* In App.js
+Change route for MovieForm to
+<Route path=... 
+render={props => {
+  if(!user) return <Redirect to="/login" />
+  return <MovieForm {...props} />
+}}
+
 -----------------------
-Section 9 Vid 18 : Showing or Hiding Elements based on the User - completed
+Section 9 Vid 19 : Protecting Routes - completed
 
 Shortcuts
 1. Wrapping html with other html
