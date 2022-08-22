@@ -720,9 +720,17 @@ super()
 const user = auth.getCurrentUser()
 if (user && user.isAdmin)
   this.columns.push(this.deleteColumn)
+---------------------------------------------------------------
+
+Section 10 : Deployment
+
+- Introduction
+* Environment Variables : Config for each environment
+* Production Builds
+* Deploying to Heroku
 
 -----------------------
-Section 9 Vid 23 : Hiding the Delete  Column - completed
+Section 10 Vid 1 : Introduction - completed
 
 Shortcuts
 1. Wrapping html with other html
