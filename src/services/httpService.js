@@ -1,10 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import logger from "./logService";
-import auth from './authService'
-
-axios.defaults.headers['Authorization'] = auth.getAuthorizationToken()
-
 
 axios.interceptors.response.use(null, (error) => {
   console.log("INTERCEPTOR CALLED");
@@ -20,9 +16,14 @@ axios.interceptors.response.use(null, (error) => {
   return Promise.reject(error);
 });
 
+export function setAuthorizationToken(token) {
+  axios.defaults.headers["Authorization"] = token;
+}
+
 export default {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
+  setAuthorizationToken,
 };

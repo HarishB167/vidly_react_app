@@ -4,6 +4,8 @@ import config from "../config.json";
 
 const apiEndpoint = config.apiUrl + "auth/jwt/create/";
 
+http.setAuthorizationToken(getAuthorizationToken());
+
 export async function login(username, password) {
   const { data: result } = await http.post(apiEndpoint, { username, password });
   localStorage.setItem("access", result.access);
