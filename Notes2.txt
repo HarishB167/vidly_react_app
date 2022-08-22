@@ -647,9 +647,13 @@ export function setAuthorizationToken(token) {
 After imports
 http.setAuthorizationToken(getAuthrizationToken())
 
+- Authorization
+* In django in CustomTokenObtainPairSerializer
+add token for isAdmin as
+token['isAdmin'] = user.is_staff
 
 -----------------------
-Section 9 Vid 16 : Fixing Bi-directional Dependencies - completed
+Section 9 Vid 17 : Authorization - completed
 
 Shortcuts
 1. Wrapping html with other html
