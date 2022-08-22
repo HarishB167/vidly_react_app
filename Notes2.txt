@@ -816,9 +816,31 @@ Run git init and commit it
 * Create a heroku app as
 heroku create --buildpack https://github.com/mars/create-react-app-buildpack.git
 * Push code to heroku : git push heroku master
+---------------------------------------------------------------
+
+Section 11 : Advanced Topics
+
+- Introduction
+* Higher Order Components
+* Hooks
+* Context
+
+- Setting Up the Development Environment
+* React doesn't supports global installation
+* Uninstall global installation
+sudo npm uninstall -g create-react-app
+* npx 
+Tool came with node v5
+Node package runner
+Download and run latest package
+* Create react app 'react-advanced' as
+npx create-react-app <appname>
+* Go to app folder and dev server
+npm start
+
 
 -----------------------
-Section 10 Vid 11 : Deploying the Frontend - completed
+Section 11 Vid 2 : Setting up the Development Environment - completed
 
 Shortcuts
 1. Wrapping html with other html
