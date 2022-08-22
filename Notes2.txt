@@ -652,8 +652,18 @@ http.setAuthorizationToken(getAuthrizationToken())
 add token for isAdmin as
 token['isAdmin'] = user.is_staff
 
+- Showing or Hiding Elements based on the User
+* In App.js
+Pass user object in Movies component in route as
+<Route ... render={props => <Movies {...props} user={user}/>} />
+* In Movies component
+In render
+const {user} = this.props
+Wrap New movie button with
+{user && ..button...}
+
 -----------------------
-Section 9 Vid 17 : Authorization - completed
+Section 9 Vid 18 : Showing or Hiding Elements based on the User - completed
 
 Shortcuts
 1. Wrapping html with other html
