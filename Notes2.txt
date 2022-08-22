@@ -748,9 +748,17 @@ env : property of process having all env variables
 * Expressions referencing environment variables are replaced
 by their actual value during build time.
 
+- Production Builds
+* Build of npm start includes additional debugging code.
+* Production build
+npm run build
+Build will be in build folder
+It can be served using simple static server
+npm i -g serve
+Serving application : serve -s build
 
 -----------------------
-Section 10 Vid 2 : Environment Variables - completed
+Section 10 Vid 3 : Production Builds - completed
 
 Shortcuts
 1. Wrapping html with other html
