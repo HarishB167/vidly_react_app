@@ -757,8 +757,58 @@ It can be served using simple static server
 npm i -g serve
 Serving application : serve -s build
 
+- Getting Started with Heroku
+* Create Heroku account
+* Install heroku-cli
+* Login heorku : heroku login
+
+- MongoDB in the Cloud
+
+- Adding Code to a Git Repository
+* Initialize repository
+* Create .gitignore and add following
+node_modules/
+* Deploy backend first and test it
+* Deploy frontent
+
+- Deploying to Heroku
+* Create heroku app
+heroku create <appname>
+* Continous Integration : 
+Using single command pushing source code to heroku,
+notifying heroku and heroku downloads the code and build
+and deploy it.
+* Pushing code
+git push heroku master
+* Open app : heroku open
+
+- Viewing Logs
+* In heroku dashboard in app
+More > View logs
+* In terminal : heroku logs
+
+- Setting Environment Variables on Heroku
+* heroku config:set vidly_db=<connection string>
+
+- Preparing the Front-end for Deployment
+* In project root add file .env.production and add
+REACT_APP_API_URL=<address of backend app>
+* Create .env.development and add
+REACT_APP_API_URL=<local address of backend app>
+* Replace references of config.json
+> In authService, genreService, movieService and userService
+Delete config import
+Change apiEnpoint and remove 'apiUrl +'
+* In httpService
+Configure a default property as
+after imports
+axios.defaults.baseURL = process.env.REACT_APP_API_URL
+* Add button to add movie in empty database
+In movies.jsx
+remove if(count===0) return <p>...
+
 -----------------------
-Section 10 Vid 3 : Production Builds - completed
+Section 10 Vid 10 : Preparing the Front-end for Deployment - completed
 
 Shortcuts
 1. Wrapping html with other html
