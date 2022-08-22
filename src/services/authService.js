@@ -25,6 +25,7 @@ export function getCurrentUser() {
       username: data.username,
       id: data.user_id,
       email: data.email,
+      isAdmin: data.isAdmin,
     };
     return user;
   } catch (ex) {

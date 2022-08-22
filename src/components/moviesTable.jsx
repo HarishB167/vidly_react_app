@@ -2,53 +2,50 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Like from "./common/like";
 import Table from "./common/table";
+import auth from "../services/authService";
 
 class MoviesTable extends Component {
-  state = {
-    columns: [
-      {
-        path: "title",
-        label: "Title",
-        content: (movie) => (
-          <Link to={"/movies/" + movie.id}>{movie.title}</Link>
-        ),
-      },
-      { path: "genre.name", label: "Genre" },
-      { path: "numberInStock", label: "Stock" },
-      { path: "dailyRentalRate", label: "Rate" },
-      {
-        key: "like",
-        content: (movie) => (
-          <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
-        ),
-      },
-    ],
+  columns = [
+    {
+      path: "title",
+      label: "Title",
+      content: (movie) => <Link to={"/movies/" + movie.id}>{movie.title}</Link>,
+    },
+    { path: "genre.name", label: "Genre" },
+    { path: "numberInStock", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rate" },
+    {
+      key: "like",
+      content: (movie) => (
+        <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+      ),
+    },
+  ];
+
+  deleteColumn = {
+    key: "delete",
+    content: (movie) => (
+      <button
+        onClick={() => this.props.onDelete(movie)}
+        type="button"
+        className="btn btn-danger btn-sm"
+      >
+        Delete
+      </button>
+    ),
   };
 
-  componentDidMount() {
-    const { user } = this.props;
-    const columns = [...this.state.columns];
-    const deleteCol = {
-      key: "delete",
-      content: (movie) => (
-        <button
-          onClick={() => this.props.onDelete(movie)}
-          type="button"
-          className="btn btn-danger btn-sm"
-        >
-          Delete
-        </button>
-      ),
-    };
-    if (user) columns.push(deleteCol);
-    this.setState({ columns });
+  constructor() {
+    super();
+    const user = auth.getCurrentUser();
+    if (user && user.isAdmin) this.columns.push(this.deleteColumn);
   }
 
   render() {
     const { movies, sortColumn, onSort } = this.props;
     return (
       <Table
-        columns={this.state.columns}
+        columns={this.columns}
         data={movies}
         sortColumn={sortColumn}
         onSort={onSort}

@@ -710,8 +710,19 @@ if (auth.getCurrentUser()) return <Redirect to="/" />
 
 - Exercise : Hiding Delete column
 
+- Hiding the Delete Column
+* In moviesTable
+import auth
+Cut delete column from columns list
+Define field deleteColumn and paste value here
+Define constructor as
+super()
+const user = auth.getCurrentUser()
+if (user && user.isAdmin)
+  this.columns.push(this.deleteColumn)
+
 -----------------------
-Section 9 Vid 22 : Exercise - completed
+Section 9 Vid 23 : Hiding the Delete  Column - completed
 
 Shortcuts
 1. Wrapping html with other html
