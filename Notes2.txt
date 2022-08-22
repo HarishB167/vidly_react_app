@@ -729,8 +729,28 @@ Section 10 : Deployment
 * Production Builds
 * Deploying to Heroku
 
+- Environment Variables
+* Variables in config.json are not environment specific.
+* Application generated with create-react-app has support
+for environment specific variables
+* In project root add file .env
+Default value environment variables can be stored
+.env.development for development value env variables
+.env.production for production value env variables
+Storing Value as : keyname should have prefix REACT_APP_
+* In .env file add
+REACT_APP_NAME=Vidly in Dev
+REACT_APP_VERSION=1
+* In index.js add after imports
+console.log(process.env)
+process : current process
+env : property of process having all env variables
+* Expressions referencing environment variables are replaced
+by their actual value during build time.
+
+
 -----------------------
-Section 10 Vid 1 : Introduction - completed
+Section 10 Vid 2 : Environment Variables - completed
 
 Shortcuts
 1. Wrapping html with other html

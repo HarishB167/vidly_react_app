@@ -9,6 +9,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "font-awesome/css/font-awesome.css";
 
+console.log(process.env);
+
 logger.init();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
