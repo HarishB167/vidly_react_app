@@ -621,8 +621,23 @@ import auth from "../services/authService"
 Remove localStorage statement
 auth.loginWithJwt(response.headers["x-auth-token"])
 
+- Calling Protected  API Endpoints
+* Enable authentication in backend
+* In httpService add authorization header to request
+common : for all
+post : for post
+After import
+import auth from './authService'
+axios.default.headers.common['Authorization'] = auth.getAuthorizationToken()
+* In authService
+Create function getAuthorizationToken
+accessToken = localStorage.getItem("access")
+if (accessToken) return `JWT ${accessToken}`
+else return null
+
+
 -----------------------
-Section 9 Vid 14 : Refactoring - completed
+Section 9 Vid 15 : Calling Protected API Endpoints - completed
 
 Shortcuts
 1. Wrapping html with other html

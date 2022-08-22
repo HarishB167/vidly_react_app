@@ -35,9 +35,16 @@ export function loginWithJwt(jwtAccess, jwtRefresh) {
   localStorage.setItem("refresh", jwtRefresh);
 }
 
+export function getAuthorizationToken() {
+  const accessToken = localStorage.getItem("access");
+  if (accessToken) return `JWT ${accessToken}`;
+  return null;
+}
+
 export default {
   login,
   logout,
   getCurrentUser,
   loginWithJwt,
+  getAuthorizationToken,
 };
