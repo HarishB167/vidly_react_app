@@ -807,8 +807,18 @@ axios.defaults.baseURL = process.env.REACT_APP_API_URL
 In movies.jsx
 remove if(count===0) return <p>...
 
+- Deploying the Frontend
+* In build folder create .gitignore add
+node_modules/
+* Initialize git repository in build
+Run git init and commit it
+* Search google for heroku buildpack for create-react-app
+* Create a heroku app as
+heroku create --buildpack https://github.com/mars/create-react-app-buildpack.git
+* Push code to heroku : git push heroku master
+
 -----------------------
-Section 10 Vid 10 : Preparing the Front-end for Deployment - completed
+Section 10 Vid 11 : Deploying the Frontend - completed
 
 Shortcuts
 1. Wrapping html with other html
