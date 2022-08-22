@@ -690,9 +690,26 @@ Replace MovieForm route as
 <ProtectedRoute path="/movies/:id" component={MovieForm}
  user={this.state.user} />
 
+- Redirecting after Login
+* Redirect : to attribute can be string or object
+object having pathname, search, state
+* Route : props arg of function passed to render attribute
+has attributes - history, location, match
+location.pathname : location before redirection
+* In ProtectedRoute
+Change value of to in Redirect to
+to={{pathname: '/login', state: {from: props.location}}}
+* In loginForm
+Check if state is set then redirect to that
+state object will be in this.props.location
+In doSubmit change as
+const {state} = this.props.location
+window.location = state ? state.from.pathname : '/';
+In render method before return
+if (auth.getCurrentUser()) return <Redirect to="/" />
 
 -----------------------
-Section 9 Vid 20 : Extracting ProtectedRoute - completed
+Section 9 Vid 21 : Redirecting after Login - completed
 
 Shortcuts
 1. Wrapping html with other html
