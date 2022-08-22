@@ -590,10 +590,39 @@ window.location = '/'
 After login route add
 <Route path="/logout" component={Logout} />
 
-
+- Refactoring
+* In authService.js add
+> In login function
+const {data:jwt} = await http...
+localStorage.setItem("token",jwt)
+mark function as async
+> Create logout function and export it
+localStorage.removeItem('token')
+> Create getCurrentUser function and export it
+import jwtDecode from "jwt-decode"
+Move try catch from App.js cdm here
+return user in try and return null in catch
+> Create loginWithJwt(jwt) function and export it
+localStorage.setItem("token", jwt)
+> Export default object with all functions
+* In loginForm in doSubmit
+Remove localStorage statement
+* In Logout in cdm
+import auth from '../services/authService'
+Remove localStorage statement
+auth.logout()
+* In App.js in cdm
+import auth from '/services/authService'
+Remove localStorage and jwtDecode statement
+const user = auth.getCurrentUser()
+this.setState({user})
+* In registerForm in doSubmit
+import auth from "../services/authService"
+Remove localStorage statement
+auth.loginWithJwt(response.headers["x-auth-token"])
 
 -----------------------
-Section 9 Vid 13 : Logging out a User - completed
+Section 9 Vid 14 : Refactoring - completed
 
 Shortcuts
 1. Wrapping html with other html

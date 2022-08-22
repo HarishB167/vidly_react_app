@@ -1,10 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
+import auth from "../services/authService";
 
 const Logout = () => {
   useEffect(() => {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
+    auth.logout();
     window.location = "/";
   });
   return null;

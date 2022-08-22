@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import jwtDecode from "jwt-decode";
 import NavBar from "./components/common/navBar";
 import Movies from "./components/movies";
 import Customers from "./components/customers";
@@ -11,6 +10,7 @@ import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import Logout from "./components/logout";
+import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -18,16 +18,8 @@ function App() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    try {
-      const jwt = localStorage.getItem("access");
-      const data = jwtDecode(jwt);
-      const user = {
-        username: data.username,
-        id: data.user_id,
-        email: data.email,
-      };
-      setUser(user);
-    } catch (es) {}
+    const user = auth.getCurrentUser();
+    setUser(user);
   }, []);
 
   return (
