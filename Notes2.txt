@@ -671,8 +671,28 @@ render={props => {
   return <MovieForm {...props} />
 }}
 
+- Extracting ProtectedRoute
+* In components/common folder create protectedRoute as
+import React
+sfc
+arg : {user, component:Component, render, ...rest}
+return (
+  <Route 
+  {...rest}
+  render={props => {
+    if (!user) return <Redirect to="/login" />;
+    return Component ? <Component {..props} /> : render(props);
+  } />
+)
+* In App.js
+import ProtectddRoute
+Replace MovieForm route as
+<ProtectedRoute path="/movies/:id" component={MovieForm}
+ user={this.state.user} />
+
+
 -----------------------
-Section 9 Vid 19 : Protecting Routes - completed
+Section 9 Vid 20 : Extracting ProtectedRoute - completed
 
 Shortcuts
 1. Wrapping html with other html
