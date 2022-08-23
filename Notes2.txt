@@ -880,9 +880,20 @@ render tooltip conditionally as
 after Movie {this.props.showTooltip &&
 <div>Some tooltip</div>}
 
+- Hooks
+* After React v16 : 
+functional components have become stateful
+function has all feature of class components
+* Why hooks
+> Classes are a bit difficult
+> Javascript classes are not real classes
+they are syntactic sugar over constructor functions.
+> The this keyword is confusing in JS
+> Class having Boilerplate code
+
 
 -----------------------
-Section 11 Vid 3 : Implementing a Higher Order Component - completed
+Section 11 Vid 6 : Hooks - completed
 
 Shortcuts
 1. Wrapping html with other html
