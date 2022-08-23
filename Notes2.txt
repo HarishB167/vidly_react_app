@@ -1075,9 +1075,29 @@ In div add button : Login
 Set onClick of button as
 onClick={() => userContext.onLoggedIn('username')}
 
+- Consuming Multiple Context
+* We can wrap component with multiple nested providers
+to provide multiple context.
+* In context folder create cartContext.js as
+import React
+const CartContext = React.createContext();
+CartContext.displayName = 'CartContext'
+export default CartContext
+* In App.js Provide component as
+import CartContext
+In render method
+Wrap all under CartContext as
+<CartContext.Provider value={{ cart: [] }} >
+  <UserContext.Provider ..>
+   ...
+  </UserContext.Provider>
+</CartContext.Provider>
+* In MovieRow add
+const cartContext = useContext(CartContext)
+console.log("Cart Context", cartContext)
 
 -----------------------
-Section 11 Vid 14 : Updating the Context - completed
+Section 11 Vid 15 : Consuming Multiple Context - completed
 
 Shortcuts
 1. Wrapping html with other html
