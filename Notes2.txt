@@ -915,10 +915,33 @@ Cannot call hooks inside loops, conditions and nested functions.
 * How react knows which value belongs to which variable
 React relies on order hooks call.
 
+- The useEffect Hook
+* Equivalent to lifecycle hooks in class component
+(componentDidMount, Update, WillUnmount)
+* Lifecycle methods in class :
+Logic is spread at multiple places
+* Using useEffect
+useEffect(func, array)
+> func : function called in the lifecycle, this function
+can return a new function for to be called at WillUnmount 
+/ clean up, this clean up function call will also depend upon
+2nd array argument.
+> array :
+null for making it call at every call,
+empty array [] to make func call at DidMount and WillUnmount
+array with state variables to make func call at change of 
+those variables
+* In Counter.jsx
+before return add
+useEffect(() => {
+  document.title = `${name} has clicked ${count} times!`
+  return () => {console.log("Clean up"}
+}, [count, name])
+* WillUnmount / clean up happens on every state change.
 
 
 -----------------------
-Section 11 Vid 7 : The useState Hook - completed
+Section 11 Vid 8 : The useEffect Hook - completed
 
 Shortcuts
 1. Wrapping html with other html
