@@ -981,9 +981,60 @@ useEffect will work on componentDidMount.
 * In App.js
 render Users component
 
+- Context
+* Prop Drilling : It is a problem when an object needs to be 
+passed deep multiple level to children using props.
+It is unmaintainable when code grows.
+> Previously Redux is used to solve this problem.
+It has a store which stores global state of application, 
+having data to be shared to different components.
+* React has a solution using Context
+Passing data down without prop drilling.
+Parent provide some context / shared data, and
+child consumes that context.
+
+- Context in Class Components
+* In src folder create context folder
+* In context folder create MoviePage.jsx, MovieList.jsx
+* In MovieList.jsx
+Create class component 
+render text : Movie List
+> Consume user context
+import UserContext
+Wrap render element as
+<UserContext.Consumer>
+  {userContext => <div>Movie List {userContext.name}</div>}
+</UserContext.Consumer>
+* In MoviePage.jsx
+Create class component
+render MovieList component
+* In App.js
+Delete all code.
+Create class component
+Add state as
+state = { currentUser : { name: "Mosh" }}
+render MoviePage
+> Provide user context
+import UserContext
+Wrap render elment as
+<UserContext.Provider value={this.state.currentUser}>
+...code...
+</UserContext.Provider>
+* In context folder create userContext.js
+import React
+const UserContext = React.createContext()
+UserContext.displayName = 'UserContext'
+export default UserContext
+* Consuming context outside render method
+1. After class definition add
+MovieList.contextType = UserContext;
+2. Inside class
+static contextType = UserContext;
+> Context accessing : this.context
+
 
 -----------------------
-Section 11 Vid 10 : Fetching Data with Hooks - completed
+Section 11 Vid 12 : Context in Class Components - completed
 
 Shortcuts
 1. Wrapping html with other html
