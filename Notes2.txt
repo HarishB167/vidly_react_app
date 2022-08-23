@@ -1047,9 +1047,37 @@ In div at last add <MovieRow />
 We don't have Consumer component
 Requires less code
 
+- Updating the Context
+* In Context Provider also pass methods to update state
+* In MovieRow
+At start of div add text : Movie Row
+* In App
+Create method handleLoggedIn(username) as
+console.log("Getting the user: " + username)
+const user = {name: "Mosh"}
+this.setState({currentUser: user})
+In UserContext.Provider change value attribute to
+value={{currentUser: this.state.currentUser,
+  onLoggedIn: this.handleLoggedIn}}
+> In state set currentUser to null
+> Add Login component after MoviePage
+* In MovieList
+In div change as
+Movie List {userContext.currentUser ? userContext.currentUser.name : ""}
+* In MovieRow
+Rename currentUser to userContext
+Change in div as
+Movie Row {userContext.currentUser ? userContext.currentUser.name : ""}
+* In context folder create Login.jsx as
+Create function component
+const userContext = useContext(UserContext)
+In div add button : Login
+Set onClick of button as
+onClick={() => userContext.onLoggedIn('username')}
+
 
 -----------------------
-Section 11 Vid 13 : Context in Functional Components - completed
+Section 11 Vid 14 : Updating the Context - completed
 
 Shortcuts
 1. Wrapping html with other html
