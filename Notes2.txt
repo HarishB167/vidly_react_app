@@ -959,9 +959,31 @@ export default function useDocumentTitle(title) {
 import useDocumentTitle
 Replace useEffect with useDocumentTitle(..title..)
 
+- Fetching Data with Hooks
+* Using jsonplaceholder.typicode.com/users
+* Install axios : npm i axios
+* In hooks folder create Users.jsx
+import axios from 'axios';
+Create function component : rsf
+const [users, setUsers] = useState([]);
+Make api call as
+useEffect(() => {
+  async function getUsers() {
+    const result = await axios('https://jsonplaceholder.typicode.com/users');
+    setUsers(result.data)
+  }
+  getUsers()
+}, [])
+> 2nd arg set to empty array to prevent stuck in loop, so
+useEffect will work on componentDidMount.
+> In return in div add
+<ul>{users.map(user => <li key={user.id}>{user.name}</li>)}</ul>
+* In App.js
+render Users component
+
 
 -----------------------
-Section 11 Vid 9 : Custom Hooks - completed
+Section 11 Vid 10 : Fetching Data with Hooks - completed
 
 Shortcuts
 1. Wrapping html with other html
