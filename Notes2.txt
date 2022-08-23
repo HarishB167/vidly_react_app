@@ -1032,9 +1032,24 @@ MovieList.contextType = UserContext;
 static contextType = UserContext;
 > Context accessing : this.context
 
+- Context in Functional Components
+* By using useContext hook
+* In context folder create MovieRow.jsx
+import {useContext} from "react";
+import UserContext
+Create function component
+const currentUser = useContext(UserContext)
+console.log("context", currentUser)
+in render in div add currentUser.name
+* In MovieList
+In div at last add <MovieRow />
+* Advantage
+We don't have Consumer component
+Requires less code
+
 
 -----------------------
-Section 11 Vid 12 : Context in Class Components - completed
+Section 11 Vid 13 : Context in Functional Components - completed
 
 Shortcuts
 1. Wrapping html with other html
