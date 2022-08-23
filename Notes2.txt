@@ -925,7 +925,7 @@ useEffect(func, array)
 > func : function called in the lifecycle, this function
 can return a new function for to be called at WillUnmount 
 / clean up, this clean up function call will also depend upon
-2nd array argument.
+2nd array argument. func can't be async.
 > array :
 null for making it call at every call,
 empty array [] to make func call at DidMount and WillUnmount
@@ -938,10 +938,30 @@ useEffect(() => {
   return () => {console.log("Clean up"}
 }, [count, name])
 * WillUnmount / clean up happens on every state change.
+* using async func
+useEffect(() => {
+  async function fName() {
+    const result = await someAsyncFunc();
+    ...
+  }
+  fName();
+});
+
+- Custom Hooks
+* In hooks folder create useDocumentTitle.js
+import useEffect
+export default function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = title;
+  });
+}
+* In Counter.jsx
+import useDocumentTitle
+Replace useEffect with useDocumentTitle(..title..)
 
 
 -----------------------
-Section 11 Vid 8 : The useEffect Hook - completed
+Section 11 Vid 9 : Custom Hooks - completed
 
 Shortcuts
 1. Wrapping html with other html
