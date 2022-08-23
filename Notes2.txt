@@ -891,9 +891,34 @@ they are syntactic sugar over constructor functions.
 > The this keyword is confusing in JS
 > Class having Boilerplate code
 
+- The useState Hook
+* Using useState
+const [varname, setVarname] = useState(initialValue)
+* In src folder create hooks folder
+* Create Counter.jsx as
+import useState
+create functional component : rsf
+In function add
+const [count, setCount] = useState(0)
+const [name, setName] = useState('')
+Add to div
+{name} has clicked {count} times.
+After div add button
+<button onClick={() => setCount(count + 1)}>Increase</button>
+Wrap div and button with Fragment
+Before div add
+<input type="text" onChange={e => setName(e.target.value)} />
+* In App.js
+replace Movie with Counter
+* Rules of Hooks
+Cannot call hooks inside loops, conditions and nested functions.
+* How react knows which value belongs to which variable
+React relies on order hooks call.
+
+
 
 -----------------------
-Section 11 Vid 6 : Hooks - completed
+Section 11 Vid 7 : The useState Hook - completed
 
 Shortcuts
 1. Wrapping html with other html
