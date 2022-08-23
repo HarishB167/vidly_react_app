@@ -838,9 +838,51 @@ npx create-react-app <appname>
 * Go to app folder and dev server
 npm start
 
+- Higher Order Components
+* To reuse logic across components
+* To add some functionality to a component
+Create a function which takes a component and 
+returns new component which wraps our component which 
+gives required functionality.
+
+- Implementing a Higher Order Component
+* Install VSCode extension : reactjs-code-snippets by 
+charalampos karypidis
+* In src folder create folder hoc
+* In hoc create Movie.jsx
+* Create class component : rcc
+* In render in div add Movie
+> Giving Tooltip functionality
+* Create file withTooltip.jsx
+Create function withTooltip
+arg : Component
+return : new component wrapping original component
+imr
+function withTooltip(Component) {
+  return class WithTooltip extends  React.Component {
+    state = {showTooltip: false}
+    mouseOver = () => this.setState({showTooltip: true})
+    mouseOut = () => this.setState({showTooltip: false})
+    render() {
+      return (<div onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} >
+       <Component {...this.props} showTooltip={this.state.showTooltip} />
+      </div>)
+    }
+  }
+}
+export default withToolitp
+* In App.js
+return only <Movie />
+* In Movie.jsx
+replace export default as
+export default withTooltip(Movie)
+render tooltip conditionally as
+after Movie {this.props.showTooltip &&
+<div>Some tooltip</div>}
+
 
 -----------------------
-Section 11 Vid 2 : Setting up the Development Environment - completed
+Section 11 Vid 3 : Implementing a Higher Order Component - completed
 
 Shortcuts
 1. Wrapping html with other html
