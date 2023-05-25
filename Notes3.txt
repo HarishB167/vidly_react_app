@@ -1,0 +1,142 @@
+React Router New 25.05.2023
+
+- Introduction
+* Setting up routes
+* Handling errors
+* Navigating between pages
+* Dynamic routes
+* Nested Routes
+* Private Routes
+
+- Setting up routing
+* Install : npm i react-router-dom@6.10.0
+* Create file as src/routing/routes.jsx
+* Import : import {createBrowserRouter} from rrd
+* Use as
+const router = createBrowserRouter([
+    { path: '/', element: <HomePage />},
+    { path: '/users', element: <UserListPage />},
+    { path: '/users/:id', element: <UserDetailPage />},
+])
+* Export : export default router
+* In index.js
+Replace <App/> with 
+<RouterProvider router={router} />
+
+- Navigation
+* Using Link
+Import {Link} from rrd
+<Link to="/users">Users</Link>
+* Using useNavigate hook
+Import {useNavigate} from rrd
+Getting navigate func : const navigate = useNavigate()
+Using : func() { ...; navigate("/"); }
+Use it only in useEffect and event handlers.
+
+- Passing Data with Route Parameters
+* In createBrowserRouter add
+{ path: '/users/:id', element: <UserDetailPage /> },
+* UserListPage create link
+<Link to={`/users/${user.id}`}>{user.name}</Link>
+
+- Getting Data about the Current Route
+* In UserDetailPage
+* Extract parameter values
+useParams() : returns params object
+const params = useParams()
+params has {id: '1'}
+* Access and update query string parameters
+useSearchParams() : returns array 
+of 2 elements [searchParams, setSearchParams]
+const [searchParams, setSearchParams] = useSearchParams()
+searchParams.toString() : name=Alice&age=25
+searchParams.get('name') : Alice
+setSearchParams has side effect, so it can be called in 
+event handler or useEffect
+* Access current location
+useLocation() : returns object having
+pathname: "/users/1"
+search: "?name=Alice&age=25"
+hash: ""
+state: null
+key: "default"
+
+- Nested Routes
+* In Layout.jsx add <Outlet /> as
+Import from rrd
+<NavBar />
+<div>
+    <Outlet />
+</div>
+Outlet is a placeholder for child component given by router
+* Also add <Outlet /> in UsersPage file for second nesting.
+* In routes.js change router as 
+const router = createBrowserRouter([
+    { 
+    path: '/', 
+    element: <Layout/>
+    children: [
+        { path: '', element: <HomePage />},
+        { 
+            path: 'users',
+            element: <UsersPage />,
+            children: [
+               { path: ':id', element: <UserDetail/>},
+            ]
+         }
+      ]
+    },    
+])
+> Path of chilren should be relative to parent, so slash at start is removed.
+> In children path: '' can be replaced with index: true, both ways are same.
+
+- Styling the Active Link
+* NavLink additionally applies active class as compared to Link, all other is same.
+<NavLink />
+* Using different word for active
+className={({isActive}) => isActive ? 'diffActive nav-link' : 'nav-link'}
+
+- Handling Errors
+* In router for root element set
+{path: '/' ..., errorElement: <ErrorPage />, children.... }
+* Grabbing error
+Import from rrd
+useRouteError() : returns error object
+const error = useRouteError()
+* Differentiate b/w invalid route error and other errors
+Import from rrd
+Pass error obj from useRouteError()
+isRouteErrorResponse(error) : true if invalid route error
+
+- Private Routes
+* Use <Navigate /> component import from rrd
+* It is a wrapper around navigate function
+* Used outside useEffect or event handlers
+* Inside useEffect or event handlers, can use navigate function directly.
+* If user not defined then
+if (!user)
+return <Navigate to="/login" />
+
+- Layout Routes
+* Grouping routes for enforcing layout or business rules.
+* Create src/routing/PrivateRoutes.jsx as
+const PrivateRoutes = () => {
+   const {user} = useAuth();
+   if (!user)
+      return <Navigate to="/login" />;
+   return <Outlet />;
+}
+* In routers create after root route as
+const router = createBrowserRouter([
+ { path: '/', ...},
+ {
+   element: <PrivateRoutes />,
+   children: [ <move routes to be protected here> ]
+ }
+])
+
+
+
+
+
+
