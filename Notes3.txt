@@ -131,7 +131,12 @@ const router = createBrowserRouter([
  { path: '/', ...},
  {
    element: <PrivateRoutes />,
-   children: [ <move routes to be protected here> ]
+   children: [ <move routes to be protected here>,
+      {
+        path: "users", element: <UsersPage />, 
+        children: [{path: ":id", element: <UsersDetail /> }] 
+      },
+    ]
  }
 ])
 
